@@ -26,7 +26,11 @@ namespace lColors {
 		YELLOW = 14,
 		WHITE = 15
 	};
+<<<<<<< HEAD
 	enum MsgType {
+=======
+	enum Template {
+>>>>>>> origin/master
 		WARNING = 0,
 		EROR = 1,
 		INFO = 2
@@ -181,7 +185,11 @@ namespace lColors {
 			SetConsoleTextAttribute(handle, k);
 	}
 
+<<<<<<< HEAD
 	void SetMessageColor(MsgType temp) {
+=======
+	void SetColorFromTemplate(Template temp) {
+>>>>>>> origin/master
 		HANDLE handle;	//handle output
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
