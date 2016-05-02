@@ -176,7 +176,7 @@ namespace lColors {
 
 		lUint operation = k;
 
-		HANDLE handle;	//handle output
+		HANDLE handle;			//handle output
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 		/* handle bitwise operations */
@@ -198,23 +198,32 @@ namespace lColors {
 		HANDLE handle;	//handle output
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
+		lUint operation;
+
 		switch (temp) {
 		case lColors::WARNING:
-			SetConsoleTextAttribute(handle, 14 | FOREGROUND_INTENSITY);
+			operation = 14;
+			operation |= FOREGROUND_INTENSITY;
 			break;
 		case lColors::EROR:
-			SetConsoleTextAttribute(handle, 4 | FOREGROUND_INTENSITY);
+			operation = 4;
+			operation |= FOREGROUND_INTENSITY;
 			break;
 		case lColors::INFO:
-			SetConsoleTextAttribute(handle, 15 | FOREGROUND_INTENSITY);
+			operation = 15;
+			operation |= FOREGROUND_INTENSITY;
 			break;
 		case lColors::IMPORTANT:
-			SetConsoleTextAttribute(handle, 5 | FOREGROUND_INTENSITY);
+			operation = 5;
+			operation |= FOREGROUND_INTENSITY;
 			break;
 		default:
-			SetConsoleTextAttribute(handle, 7 | FOREGROUND_INTENSITY);
+			operation = 7;
+			operation |= FOREGROUND_INTENSITY;
 			break;
 		}
+
+		SetConsoleTextAttribute(handle, operation);
 	}
 
 	void SetDefaultColor() {
