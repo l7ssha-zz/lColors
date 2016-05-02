@@ -2,13 +2,15 @@
 //		- Completly free
 //		- Colors numbers in enum
 //	lColors - 1 header library
-
 #pragma once
 
 #include <windows.h>   // WinApi header
 
 namespace lColors {
-	enum Color {	//ENUM CLASS FOR EASY CHOOSE
+	typedef unsigned int lUint;
+
+	//ENUM CLASS FOR EASY CHOOSE
+	enum Color {
 		BLACK = 0,
 		BLUE = 1,
 		GREEN = 2,
@@ -26,38 +28,43 @@ namespace lColors {
 		YELLOW = 14,
 		WHITE = 15
 	};
+	//MESSANGE ENUM
 	enum MsgType {
 		WARNING = 0,
 		EROR = 1,
-		INFO = 2
+		INFO = 2,
+		IMPORTANT = 3
 	};
 
 	void SetColor(int foreground, int backgroud = 0, bool foregroudIntensity = false, bool backgroundIntensity = false)
 	{
 		int k = foreground + (backgroud * 16);	//calculate the color
-		HANDLE handle;	//hnadle output
+		lUint operation = k;					//get the bitwise operation
 
+		HANDLE handle;							//hnadle output
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 		if (foreground <= 15 && backgroud <= 15)	//for safety
 		{
-			if (backgroundIntensity == true && foregroudIntensity == true)
-				SetConsoleTextAttribute(handle, k | FOREGROUND_INTENSITY | BACKGROUND_INTENSITY);
+			if (backgroundIntensity == true && foregroudIntensity == true) {
+				operation |= FOREGROUND_INTENSITY;
+				operation |= BACKGROUND_INTENSITY;
+			}
 			else if (backgroundIntensity == false && foregroudIntensity == true)
-				SetConsoleTextAttribute(handle, k | FOREGROUND_INTENSITY);
+				operation |= FOREGROUND_INTENSITY;
 			else if (backgroundIntensity == true && foregroudIntensity == false)
-				SetConsoleTextAttribute(handle, k | BACKGROUND_INTENSITY);
+				operation |= BACKGROUND_INTENSITY;
 			else if (backgroundIntensity == false && foregroudIntensity == false)
-				SetConsoleTextAttribute(handle, k);
+				SetConsoleTextAttribute(handle, operation);
 		}
 		else
-			SetConsoleTextAttribute(handle, 7);
+			SetConsoleTextAttribute(handle, 7);	//default
 	}
 
 	void SetColor(Color foregroud, Color backgroud = Color::BLACK, bool foregroudIntensity = false, bool backgroundIntensity = false) {
-		int f = 7;
-		int b = 0;
+		int f = 7, b = 0;	//set default for safety
 
+		//switches for set the colors
 		switch (foregroud)
 		{
 		case Color::BLACK:
@@ -111,7 +118,6 @@ namespace lColors {
 		default:
 			break;
 		}	   //switch ;-;
-
 		switch (backgroud)
 		{
 		case Color::BLACK:
@@ -166,27 +172,33 @@ namespace lColors {
 			break;
 		}	   //switch ;-;
 
-		int k = f + (b * 16);
-		HANDLE handle;	//handle output
+		int k = f + (b * 16);	//calculate the color
 
+		lUint operation = k;
+
+		HANDLE handle;	//handle output
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-		if (backgroundIntensity == true && foregroudIntensity == true)
-			SetConsoleTextAttribute(handle, k | FOREGROUND_INTENSITY | BACKGROUND_INTENSITY);
+		/* handle bitwise operations */
+		if (backgroundIntensity == true && foregroudIntensity == true) {
+			operation |= FOREGROUND_INTENSITY;
+			operation |= BACKGROUND_INTENSITY;
+		}
 		else if (backgroundIntensity == false && foregroudIntensity == true)
-			SetConsoleTextAttribute(handle, k | FOREGROUND_INTENSITY);
+			operation |= FOREGROUND_INTENSITY;
 		else if (backgroundIntensity == true && foregroudIntensity == false)
-			SetConsoleTextAttribute(handle, k | BACKGROUND_INTENSITY);
+			operation |= BACKGROUND_INTENSITY;
 		else if (backgroundIntensity == false && foregroudIntensity == false)
-			SetConsoleTextAttribute(handle, k);
+			SetConsoleTextAttribute(handle, operation);
+
+		SetConsoleTextAttribute(handle, operation);
 	}
 
 	void SetMessageColor(MsgType temp) {
 		HANDLE handle;	//handle output
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-		switch (temp)
-		{
+		switch (temp) {
 		case lColors::WARNING:
 			SetConsoleTextAttribute(handle, 14 | FOREGROUND_INTENSITY);
 			break;
@@ -195,6 +207,9 @@ namespace lColors {
 			break;
 		case lColors::INFO:
 			SetConsoleTextAttribute(handle, 15 | FOREGROUND_INTENSITY);
+			break;
+		case lColors::IMPORTANT:
+			SetConsoleTextAttribute(handle, 5 | FOREGROUND_INTENSITY);
 			break;
 		default:
 			SetConsoleTextAttribute(handle, 7 | FOREGROUND_INTENSITY);

@@ -3,9 +3,10 @@
 
 int main() {
 	std::cout << "tak" << std::endl;
-	lColors::SetColor(lColors::Color::LIGHTBLUE);
+	lColors::SetColor(lColors::YELLOW, lColors::BLACK, 1, 0);
 	std::cout << "tak" << std::endl;
 
-	int k;
-	std::cin >> k;
+	lColors::SetDefaultColor();
+	system("PAUSE");
+	return 0;
 }
