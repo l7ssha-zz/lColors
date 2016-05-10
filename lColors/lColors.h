@@ -7,7 +7,7 @@
 #include <windows.h>   // WinApi header
 
 namespace lColors {
-	typedef unsigned int lUint;
+	typedef unsigned int Luint;
 
 	//ENUM CLASS FOR EASY CHOOSE
 	enum Color {
@@ -28,6 +28,7 @@ namespace lColors {
 		YELLOW = 14,
 		WHITE = 15
 	};
+
 	//MESSANGE ENUM
 	enum MsgType {
 		WARNING = 0,
@@ -39,7 +40,7 @@ namespace lColors {
 	void SetColor(int foreground, int backgroud = 0, bool foregroudIntensity = false, bool backgroundIntensity = false)
 	{
 		int k = foreground + (backgroud * 16);	//calculate the color
-		lUint operation = k;					//get the bitwise operation
+		Luint operation = k;					//get the bitwise operation
 
 		HANDLE handle;							//hnadle output
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -174,7 +175,7 @@ namespace lColors {
 
 		int k = f + (b * 16);	//calculate the color
 
-		lUint operation = k;
+		Luint operation = k;
 
 		HANDLE handle;			//handle output
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -198,28 +199,23 @@ namespace lColors {
 		HANDLE handle;	//handle output
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-		lUint operation;
+		Luint operation = 7;
 
 		switch (temp) {
 		case lColors::WARNING:
-			operation = 14;
-			operation |= FOREGROUND_INTENSITY;
+			operation = 14 | FOREGROUND_INTENSITY;
 			break;
 		case lColors::EROR:
-			operation = 4;
-			operation |= FOREGROUND_INTENSITY;
+			operation = 4 | FOREGROUND_INTENSITY;
 			break;
 		case lColors::INFO:
-			operation = 15;
-			operation |= FOREGROUND_INTENSITY;
+			operation = 15 | FOREGROUND_INTENSITY;
 			break;
 		case lColors::IMPORTANT:
-			operation = 5;
-			operation |= FOREGROUND_INTENSITY;
+			operation = 5 | FOREGROUND_INTENSITY;
 			break;
 		default:
-			operation = 7;
-			operation |= FOREGROUND_INTENSITY;
+			operation = 7 | FOREGROUND_INTENSITY;
 			break;
 		}
 

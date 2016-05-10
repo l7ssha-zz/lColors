@@ -9,24 +9,30 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "lColors-Test", "lColors-Tes
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24CA9368-677F-46D3-9CAA-EE456087D9B0}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{24CA9368-677F-46D3-9CAA-EE456087D9B0}.Debug|x64.ActiveCfg = Debug|x64
 		{24CA9368-677F-46D3-9CAA-EE456087D9B0}.Debug|x64.Build.0 = Debug|x64
 		{24CA9368-677F-46D3-9CAA-EE456087D9B0}.Debug|x86.ActiveCfg = Debug|Win32
 		{24CA9368-677F-46D3-9CAA-EE456087D9B0}.Debug|x86.Build.0 = Debug|Win32
+		{24CA9368-677F-46D3-9CAA-EE456087D9B0}.Release|Any CPU.ActiveCfg = Release|Win32
 		{24CA9368-677F-46D3-9CAA-EE456087D9B0}.Release|x64.ActiveCfg = Release|x64
 		{24CA9368-677F-46D3-9CAA-EE456087D9B0}.Release|x64.Build.0 = Release|x64
 		{24CA9368-677F-46D3-9CAA-EE456087D9B0}.Release|x86.ActiveCfg = Release|Win32
 		{24CA9368-677F-46D3-9CAA-EE456087D9B0}.Release|x86.Build.0 = Release|Win32
+		{3316F803-29DC-4928-AABE-F9763C9B2A1A}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{3316F803-29DC-4928-AABE-F9763C9B2A1A}.Debug|x64.ActiveCfg = Debug|x64
 		{3316F803-29DC-4928-AABE-F9763C9B2A1A}.Debug|x64.Build.0 = Debug|x64
 		{3316F803-29DC-4928-AABE-F9763C9B2A1A}.Debug|x86.ActiveCfg = Debug|Win32
 		{3316F803-29DC-4928-AABE-F9763C9B2A1A}.Debug|x86.Build.0 = Debug|Win32
+		{3316F803-29DC-4928-AABE-F9763C9B2A1A}.Release|Any CPU.ActiveCfg = Release|Win32
 		{3316F803-29DC-4928-AABE-F9763C9B2A1A}.Release|x64.ActiveCfg = Release|x64
 		{3316F803-29DC-4928-AABE-F9763C9B2A1A}.Release|x64.Build.0 = Release|x64
 		{3316F803-29DC-4928-AABE-F9763C9B2A1A}.Release|x86.ActiveCfg = Release|Win32
