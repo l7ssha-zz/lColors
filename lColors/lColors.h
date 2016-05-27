@@ -45,21 +45,23 @@ namespace lColors {
 		HANDLE handle;							//hnadle output
 		handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
-		if (foreground <= 15 && backgroud <= 15)	//for safety
-		{
-			if (backgroundIntensity == true && foregroudIntensity == true) {
-				operation |= FOREGROUND_INTENSITY;
-				operation |= BACKGROUND_INTENSITY;
+			if (foreground <= 15 && backgroud <= 15)	//for safety
+			{
+				if (backgroundIntensity == true && foregroudIntensity == true) {
+					operation |= FOREGROUND_INTENSITY;
+					operation |= BACKGROUND_INTENSITY;
+				}
+				else if (backgroundIntensity == false && foregroudIntensity == true)
+					operation |= FOREGROUND_INTENSITY;
+				else if (backgroundIntensity == true && foregroudIntensity == false)
+					operation |= BACKGROUND_INTENSITY;
+				else if (backgroundIntensity == false && foregroudIntensity == false)
+					SetConsoleTextAttribute(handle, operation);
 			}
-			else if (backgroundIntensity == false && foregroudIntensity == true)
-				operation |= FOREGROUND_INTENSITY;
-			else if (backgroundIntensity == true && foregroudIntensity == false)
-				operation |= BACKGROUND_INTENSITY;
-			else if (backgroundIntensity == false && foregroudIntensity == false)
-				SetConsoleTextAttribute(handle, operation);
-		}
-		else
-			SetConsoleTextAttribute(handle, 7);	//default
+			else
+				SetConsoleTextAttribute(handle, 7);	//default
+
+		SetConsoleTextAttribute(handle, operation);
 	}
 
 	void SetColor(Color foregroud, Color backgroud = Color::BLACK, bool foregroudIntensity = false, bool backgroundIntensity = false) {
