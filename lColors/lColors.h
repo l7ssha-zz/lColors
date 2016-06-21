@@ -9,7 +9,12 @@
 namespace lColors {
 	typedef unsigned int Luint;
 
-	//ENUM CLASS FOR EASY CHOOSE
+	inline HANDLE handle() {
+		HANDLE handle;			//handle output
+		return handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	}
+
+	//COLOR ENUM FOR EASY CHOOSE
 	enum Color {
 		BLACK = 0,
 		BLUE = 1,
@@ -39,13 +44,10 @@ namespace lColors {
 
 	void SetColor(int foreground, int backgroud = 0, bool foregroudIntensity = false, bool backgroundIntensity = false)
 	{
-		int k = foreground + (backgroud * 16);	//calculate the color
+		Luint k = foreground + (backgroud * 16);	//calculate the color
 		Luint operation = k;					//get the bitwise operation
 
-		HANDLE handle;							//hnadle output
-		handle = GetStdHandle(STD_OUTPUT_HANDLE);
-
-			if (foreground <= 15 && backgroud <= 15)	//for safety
+			if ((foreground <= 15 && backgroud <= 15) && (foreground > -1 && backgroud > -1))	//for safety
 			{
 				if (backgroundIntensity == true && foregroudIntensity == true) {
 					operation |= FOREGROUND_INTENSITY;
@@ -56,16 +58,16 @@ namespace lColors {
 				else if (backgroundIntensity == true && foregroudIntensity == false)
 					operation |= BACKGROUND_INTENSITY;
 				else if (backgroundIntensity == false && foregroudIntensity == false)
-					SetConsoleTextAttribute(handle, operation);
+					SetConsoleTextAttribute(handle(), operation);
 			}
 			else
-				SetConsoleTextAttribute(handle, 7);	//default
+				SetConsoleTextAttribute(handle(), 7);	//default
 
-		SetConsoleTextAttribute(handle, operation);
+		SetConsoleTextAttribute(handle(), operation);
 	}
 
 	void SetColor(Color foregroud, Color backgroud = Color::BLACK, bool foregroudIntensity = false, bool backgroundIntensity = false) {
-		int f = 7, b = 0;	//set default for safety
+		Luint f = 7, b = 0;	//set default for safety
 
 		//switches for set the colors
 		switch (foregroud)
@@ -175,12 +177,9 @@ namespace lColors {
 			break;
 		}	   //switch ;-;
 
-		int k = f + (b * 16);	//calculate the color
+		Luint k = f + (b * 16);	//calculate the color
 
 		Luint operation = k;
-
-		HANDLE handle;			//handle output
-		handle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 		/* handle bitwise operations */
 		if (backgroundIntensity == true && foregroudIntensity == true) {
@@ -192,15 +191,12 @@ namespace lColors {
 		else if (backgroundIntensity == true && foregroudIntensity == false)
 			operation |= BACKGROUND_INTENSITY;
 		else if (backgroundIntensity == false && foregroudIntensity == false)
-			SetConsoleTextAttribute(handle, operation);
+			SetConsoleTextAttribute(handle(), operation);
 
-		SetConsoleTextAttribute(handle, operation);
+		SetConsoleTextAttribute(handle(), operation);
 	}
 
 	void SetMessageColor(MsgType temp) {
-		HANDLE handle;	//handle output
-		handle = GetStdHandle(STD_OUTPUT_HANDLE);
-
 		Luint operation = 7;
 
 		switch (temp) {
@@ -221,13 +217,10 @@ namespace lColors {
 			break;
 		}
 
-		SetConsoleTextAttribute(handle, operation);
+		SetConsoleTextAttribute(handle(), operation);
 	}
 
 	void SetDefaultColor() {
-		HANDLE handle;
-		handle = GetStdHandle(STD_OUTPUT_HANDLE);
-
-		SetConsoleTextAttribute(handle, 7);
+		SetConsoleTextAttribute(handle(), 7);
 	}
 }

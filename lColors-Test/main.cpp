@@ -3,7 +3,7 @@
 
 int main() {
 	std::cout << "tak" << std::endl;
-	lColors::SetColor(lColors::YELLOW, lColors::BLACK, 1, 0);
+	lColors::SetColor(lColors::BLUE, lColors::BLACK);
 	std::cout << "tak" << std::endl;
 
 	lColors::SetDefaultColor();
